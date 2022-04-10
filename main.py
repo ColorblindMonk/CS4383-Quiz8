@@ -1,9 +1,13 @@
 import functions_framework
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/gcf')
+@cross_origin()
 @functions_framework.http
 def do_op(request):
     """ Responds to an HTTP request using data from the request body parsed
@@ -34,3 +38,4 @@ def do_op(request):
                     return 'Div by zero!'
 
     return 'No operation!'
+
