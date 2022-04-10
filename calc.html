@@ -7,32 +7,46 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Calculator</title>
     <style>
-        .wrapper { display: block; }
+        .input-wrapper { display: block; }
+        .container {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+        .flex {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
     </style>
 </head>
 <body>
-    <div class="operands">
-        <div class="wrapper">
-            <input type="text" name="inputOne" id="inputOne">
+    <div class="container">
+        <div class="flex">
+            <div class="operands">
+                <div class="input-wrapper">
+                    <input type="text" name="inputOne" id="inputOne">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" name="inputTwo" id="inputTwo">
+                </div>
+                <div class="operators">
+                    <button onclick="add()">Add</button>
+                    <button onclick="sub()">Sub</button>
+                    <button onclick="mul()">Mul</button>
+                    <button onclick="div()">Div</button>
+                </div>
+            </div>
+            <div class="result">
+                <p id="result"></p>
+                <button>Publish to Pub/Sub</button>
+            </div>    
         </div>
-        <div class="wrapper">
-            <input type="text" name="inputTwo" id="inputTwo">
-        </div>
-    </div>
-    <div class="result">
-        <p id="result"></p>
-    </div>
-
-    <div class="operators">
-        <button onclick="add()">Add</button>
-        <button onclick="sub()">Sub</button>
-        <button onclick="mul()">Mul</button>
-        <button onclick="div()">Div</button>
     </div>
 
     <script>
 
-        let url = 'http://127.0.0.1:8080';
+        let url = 'https://us-central1-cloud-computing-sandbox-346022.cloudfunctions.net/do-op';
 
         const inputOne = document.getElementById('inputOne');
         const inputTwo = document.getElementById('inputTwo');
