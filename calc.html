@@ -46,20 +46,21 @@
 
     <script>
 
-        let url = 'https://us-central1-cloud-computing-sandbox-346022.cloudfunctions.net/do-op';
+        const opURL = 'https://us-central1-cloud-computing-sandbox-346022.cloudfunctions.net/do-op';
 
         const inputOne = document.getElementById('inputOne');
         const inputTwo = document.getElementById('inputTwo');
         const result = document.getElementById('result');
 
-        const add = () => axios.get(`${url}?operation=add&data1=${parseFloat(inputOne.value)}&data2=${parseFloat(inputTwo.value)}`)
-                                .then(response => result.innerText = response.data);
-        const sub = () => axios.get(`${url}?operation=sub&data1=${parseFloat(inputOne.value)}&data2=${parseFloat(inputTwo.value)}`)
-                                .then(response => result.innerText = response.data);
-        const mul = () => axios.get(`${url}?operation=mul&data1=${parseFloat(inputOne.value)}&data2=${parseFloat(inputTwo.value)}`)
-                                .then(response => result.innerText = response.data);
-        const div = () => axios.get(`${url}?operation=div&data1=${parseFloat(inputOne.value)}&data2=${parseFloat(inputTwo.value)}`)
-                                .then(response => result.innerText = response.data);
+        const processRequest = (op, data1, data2) => {
+            return axios.get(`${opURL}?operation=${op}&data1=${data1}&data2=${data2}`)
+                        .then(response => response.data);
+        }
+
+        const add = async () => result.innerText = await processRequest('add', parseFloat(inputOne.value), parseFloat(inputTwo.value));
+        const sub = async () => result.innerText = await processRequest('sub', parseFloat(inputOne.value), parseFloat(inputTwo.value));
+        const mul = async () => result.innerText = await processRequest('mul', parseFloat(inputOne.value), parseFloat(inputTwo.value));
+        const div = async () => result.innerText = await processRequest('div', parseFloat(inputOne.value), parseFloat(inputTwo.value));
     </script>
 </body>
 </html>
