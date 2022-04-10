@@ -4,9 +4,7 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/gcf')
 @cross_origin()
 @functions_framework.http
 def do_op(request):
@@ -24,18 +22,18 @@ def do_op(request):
     args_list = ['operation', 'data1', 'data2']
 
     if request_args and (set(args_list) & set(request_args)) == set(args_list):
-        match request_args['operation']:
-            case 'add':
-                return str(round(float(request_args['data1']) + float(request_args['data2']), 2))
-            case 'sub':
-                return str(round(float(request_args['data1']) - float(request_args['data2']), 2))
-            case 'mul':
-                return str(round(float(request_args['data1']) * float(request_args['data2']), 2))
-            case 'div':
-                try:
-                    return str(round(float(request_args['data1']) / float(request_args['data2']), 2))
-                except ZeroDivisionError:
-                    return 'Div by zero!'
+        match_case = request_args['operation']
+        if match_case == 'add':
+            return str(round(float(request_args['data1']) + float(request_args['data2']), 2))
+        if match_case == 'sub':
+            return str(round(float(request_args['data1']) - float(request_args['data2']), 2))
+        if match_case == 'mul':
+            return str(round(float(request_args['data1']) * float(request_args['data2']), 2))
+        if match_case == 'div':
+            try:
+                return str(round(float(request_args['data1']) / float(request_args['data2']), 2))
+            except ZeroDivisionError:
+                return 'Div by zero!'
 
     return 'No operation!'
 
