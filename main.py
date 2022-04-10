@@ -1,5 +1,9 @@
 import functions_framework
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.route('/gcf')
 @functions_framework.http
 def do_op(request):
     """ Responds to an HTTP request using data from the request body parsed
@@ -30,4 +34,3 @@ def do_op(request):
                     return 'Div by zero!'
 
     return 'No operation!'
-    

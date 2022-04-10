@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .wrapper { display: block; }
+    </style>
+</head>
+<body>
+    <div class="operands">
+        <div class="wrapper">
+            <input type="text" name="inputOne" id="inputOne">
+        </div>
+        <div class="wrapper">
+            <input type="text" name="inputTwo" id="inputTwo">
+        </div>
+    </div>
+    <div class="result">
+        <p id="result"></p>
+    </div>
+
+    <div class="operators">
+        <button>Add</button>
+        <button>Sub</button>
+        <button>Mul</button>
+        <button>Div</button>
+    </div>
+
+    <script>
+        const inputOne = document.getElementById('inputOne');
+        const inputTwo = document.getElementById('inputTwo');
+        const result = document.getElementById('result');
+    </script>
+</body>
+</html>
