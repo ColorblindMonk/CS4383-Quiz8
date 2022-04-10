@@ -1,17 +1,20 @@
 import base64
 import json
-import flask
+from flask import Flask
+from flask_cors import CORS, cross_origin
 import functions_framework
 
 from google.cloud import pubsub_v1
 
+app = Flask(__name__)
+CORS(app)
 
 # Instantiates a Pub/Sub client
 publisher = pubsub_v1.PublisherClient()
 PROJECT_ID = 'cloud-computing-sandbox-346022'
 
-
 # Publishes a message to a Cloud Pub/Sub topic.
+@cross_origin()
 @functions_framework.http
 def publish_result(request):
     
