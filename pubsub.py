@@ -1,13 +1,9 @@
 import base64
 import json
-from flask import Flask
 from flask_cors import CORS, cross_origin
 import functions_framework
 
 from google.cloud import pubsub_v1
-
-app = Flask(__name__)
-CORS(app)
 
 # Instantiates a Pub/Sub client
 publisher = pubsub_v1.PublisherClient()
