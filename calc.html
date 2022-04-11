@@ -40,16 +40,20 @@
             <div class="result">
                 <p id="result"></p>
                 <button>Publish to Pub/Sub</button>
+                <p id="confirm"></p>
+                <button onclick="publish()">Publish to Pub/Sub</button>
             </div>    
         </div>
     </div>
 
     <script>
 
-        const opURL = 'https://us-central1-cloud-computing-sandbox-346022.cloudfunctions.net/do-op';
+        const opURL  = 'https://us-central1-cloud-computing-sandbox-346022.cloudfunctions.net/do-op';
+        const pubURL = 'https://us-central1-cloud-computing-sandbox-346022.cloudfunctions.net/pubsub';
 
         const inputOne = document.getElementById('inputOne');
         const inputTwo = document.getElementById('inputTwo');
+        const confirm = document.getElementById('confirm');
         const result = document.getElementById('result');
 
         const processRequest = (op, data1, data2) => {
@@ -61,6 +65,13 @@
         const sub = async () => result.innerText = await processRequest('sub', parseFloat(inputOne.value), parseFloat(inputTwo.value));
         const mul = async () => result.innerText = await processRequest('mul', parseFloat(inputOne.value), parseFloat(inputTwo.value));
         const div = async () => result.innerText = await processRequest('div', parseFloat(inputOne.value), parseFloat(inputTwo.value));
+
+        const publish = () => {
+            axios.post(pubURL, {
+                message: result.innerText,
+            })
+            .then(response => confirm.innerText = response.data);
+        }
     </script>
 </body>
 </html>
