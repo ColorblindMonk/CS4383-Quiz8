@@ -7,7 +7,49 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Calculator</title>
     <style>
-        .input-wrapper { display: block; }
+        :root {
+            --primary: #f8a744;
+            --secondary: #007eb5;
+            --secondary-hover: #05a7ec;
+            --font-size: 1.2rem;
+            --line-height: 1.5;
+        }
+        body { background-color: #fff7e7; }
+        label { 
+            display: block;
+            line-height: var(--line-height);
+            font-size: var(--font-size);
+        }
+        .operands {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .operators { 
+            max-width: 800px; 
+        }
+        .operands, .operators, .result-container, h1 {
+            text-align: center;
+        }
+        .result {
+            border: 2px solid #000;
+            background-color: #fff;
+            max-width: 3rem;
+            margin: auto;
+            padding: .4rem 1rem;
+            font-size: var(--font-size);
+        }
+        button {
+            display: inline;
+            color: #fff;
+            border: none;
+            padding: .4rem 1rem;
+            background-color: var(--secondary);
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: var(--secondary-hover);
+            cursor: pointer;
+        }
         .container {
             display: grid;
             place-items: center;
@@ -17,29 +59,34 @@
             display: flex;
             flex-direction: column;
             gap: 3rem;
+            padding: 2rem;
+            background-color: var(--primary);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="flex">
+            <h1>Calculator</h1>
             <div class="operands">
                 <div class="input-wrapper">
+                    <label for="inputOne">Number 1:</label>
                     <input type="text" name="inputOne" id="inputOne">
                 </div>
                 <div class="input-wrapper">
+                    <label for="inputTwo">Number 2:</label>
                     <input type="text" name="inputTwo" id="inputTwo">
                 </div>
-                <div class="operators">
-                    <button onclick="add()">Add</button>
-                    <button onclick="sub()">Sub</button>
-                    <button onclick="mul()">Mul</button>
-                    <button onclick="div()">Div</button>
-                </div>
             </div>
-            <div class="result">
-                <p id="result"></p>
-                <button>Publish to Pub/Sub</button>
+            <div class="operators">
+                <button onclick="add()">Add</button>
+                <button onclick="sub()">Sub</button>
+                <button onclick="mul()">Mul</button>
+                <button onclick="div()">Div</button>
+            </div>
+            <div class="result-container">
+                <h4>Result</h4>
+                <p class="result" id="result">...</p>
                 <p id="confirm"></p>
                 <button onclick="publish()">Publish to Pub/Sub</button>
             </div>    
